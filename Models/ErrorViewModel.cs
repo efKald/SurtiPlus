@@ -7,3 +7,4 @@ namespace SurtiPlus.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+//lal
