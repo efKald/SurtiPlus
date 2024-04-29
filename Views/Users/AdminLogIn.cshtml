@@ -1,0 +1,42 @@
+﻿@model SurtiPlus.Models.Adminv
+
+@{
+    ViewData["Title"] = "AdminLogIn";
+}
+
+<h1>Administrador</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdminLogIn">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AdminNameId" class="control-label"></label>
+                <input asp-for="AdminNameId" class="form-control" />
+                <span asp-validation-for="AdminNameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdminPassword" class="control-label"></label>
+                <input asp-for="AdminPassword" class="form-control" type="password"/>
+                <span asp-validation-for="AdminPassword" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Ingresar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Welcome" asp-controller="Home">Página de bienvenida</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

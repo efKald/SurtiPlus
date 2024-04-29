@@ -1,0 +1,36 @@
+<script>
+        // Wait for the document to be ready
+        $(document).ready(function() {
+            // Set timeout to hide the message after 10 seconds
+            setTimeout(function() {
+                $("#message").fadeOut("slow");
+            }, 20000); // 10000 milliseconds = 10 seconds
+
+            function displayErrorMessage(message) {
+                $("#errorMessage").text(message).fadeIn("slow");
+            }
+            // Function to validate input fields
+            function validateFields() {
+                // Check if any input field is empty
+                if ($("#Carnesvalue").val().trim() === "" || parseFloat($("#Carnesvalue").val()) < 0 ||
+                $("#Lacteosvalue").val().trim() === "" || parseFloat($("#Lacteosvalue").val()) < 0 ||
+                $("#Granosvalue").val().trim() === "" || parseFloat($("#Granosvalue").val()) < 0 ||
+                $("#Aseovalue").val().trim() === "" || parseFloat($("#Aseovalue").val()) < 0) {
+                // Display error message
+                    $("#errorMessage").text("Asegurate que todos los campos esten llenos y que el valor sea mayor o igual a cero");
+                    return false; // Prevent form submission
+                }
+                // Validation passed
+                return true;
+            }
+
+            // Event listener for form submission
+            $("#buyForm").submit(function (event) {
+                // Validate input fields
+                if (!validateFields()) {
+                    // Prevent form submission if validation fails
+                    event.preventDefault();
+                }
+            });
+        });
+</script>
