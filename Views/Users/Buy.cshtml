@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SurtiPlus.Models.Productv>
+@{
+ViewData["Title"] = "Buy";
+}
+
+@Html.RenderPartialAsync("_BuyUserInformationPartial");
+
+<h1>Products</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminNameId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminNameId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="buyForm" asp-action="Buy" method="post">
+            <div class="form-group">
+                <label for="Carnesvalue" class="control-label">Lotes de Carne</label>
+                <input type="text" id="Carnesvalue" name="Carnesvalue" class="form-control" style="width: 150px;" />
+            </div>|
+            <div class="form-group">
+                <label for="Lacteosvalue" class="control-label">Lotes de Lacteos</label>
+                <input type="text" id="Lacteosvalue" name="Lacteosvalue" class="form-control" style="width: 150px;" />
+            </div>|
+            <div class="form-group">
+                <label for="Granosvalue" class="control-label">Lotes de Granos</label>
+                <input type="text" id="Granosvalue" name="Granosvalue" class="form-control" style="width: 150px;" />
+            </div>|
+            <div class="form-group">
+                <label for="Aseovalue" class="control-label">Lotes de Aseo</label>
+                <input type="text" id="Aseovalue" name="Aseovalue" class="form-control" style="width: 150px;" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Comprar Lotes" class="btn btn-primary" /> |
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div id="message" class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<div>
+    <a asp-action="Welcome" asp-controller="Home">Página de bienvenida</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_BuyMessageScriptsPartial"); @*For js scripts.*@
+    }
+}

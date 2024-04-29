@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
-using MVCCRUD.Models;
+using SurtiPlus.Models;
 
 
 namespace SurtiPlus.Models
@@ -40,7 +40,7 @@ namespace SurtiPlus.Models
 
             modelBuilder.Entity<Productv>(entity =>
             {
-                entity.Property(e => e.AdminName)
+                entity.Property(e => e.AdminNameId)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
@@ -51,7 +51,7 @@ namespace SurtiPlus.Models
 
             modelBuilder.Entity<Userv>(entity =>
             {
-                entity.Property(e => e.AdminName)
+                entity.Property(e => e.AdminNameId)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
@@ -71,6 +71,7 @@ namespace SurtiPlus.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
             });
+            
         }
 
     }
