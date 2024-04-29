@@ -7,6 +7,12 @@
 <h1>¡Bienvenido!</h1>
 
 <h4>Registrate Aquí</h4>
+@if (TempData["Message"] != null)
+{
+    <div id="message" class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -50,6 +56,7 @@
 
 @section Scripts {
     @{
+        await Html.RenderPartialAsync("_BuyMessageScriptsPartial"); @*For js scripts.*@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    } 
+    }
 }

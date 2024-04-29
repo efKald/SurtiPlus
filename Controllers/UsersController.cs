@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
@@ -23,6 +24,7 @@ namespace SurtiPlus.Controllers
         {
             return View();
         }
+        // redirecttoaction can be used to call a controller that doesn't render a view. may be used for partialv iews.
         // POST: Users/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -30,16 +32,35 @@ namespace SurtiPlus.Controllers
         {
             if (ModelState.IsValid) 
             {
-                var firstRow = await _context.Admin.FirstOrDefaultAsync();
-                string? administration = null;
-                if (firstRow != null && firstRow.AdminNameId != null)
+                var checkId = await _context.User.FindAsync(userv.UserId);
+                if (checkId == null)
                 {
-                    administration = firstRow.AdminNameId;
+                    if (userv.UserId >= 0 && userv.UserPassword != null && userv.UserName != null && userv.Email != null && userv.Phone != null)
+                    {
+                        var firstRow = await _context.Admin.FirstOrDefaultAsync();
+                        string? administration = null;
+                        if (firstRow != null && firstRow.AdminNameId != null)
+                        {
+                            administration = firstRow.AdminNameId;
+                        }
+                        userv.AdminNameId = administration;
+                        _context.Add(userv);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Welcome", "Home");
+                    }
+                    else 
+                    {
+                        TempData["Message"] = "Llene todos los campos y asegurese que el Id de usuario sea mayor o igual que cerof";
+
+                        return (View(userv));
+                    }
                 }
-                userv.AdminNameId = administration;
-                _context.Add(userv); 
-                await _context.SaveChangesAsync(); 
-                return RedirectToAction("Welcome", "Home");
+                else 
+                {
+                    TempData["Message"] = "Este usuario ya está registrados";
+
+                    return (View(userv));
+                }
             }
             return View(userv);
         }
@@ -106,32 +127,32 @@ namespace SurtiPlus.Controllers
                     try
                     {
                         var carnesRow = await _context.Product
-                                                     .FirstOrDefaultAsync(m => m.ProductType == "Carnes");
+                                                        .FirstOrDefaultAsync(m => m.ProductType == "Carnes");
                         var lacteosRow = await _context.Product
-                                                     .FirstOrDefaultAsync(m => m.ProductType == "Lacteos");
+                                                        .FirstOrDefaultAsync(m => m.ProductType == "Lacteos");
                         var granosRow = await _context.Product
-                                                     .FirstOrDefaultAsync(m => m.ProductType == "Granos");
+                                                        .FirstOrDefaultAsync(m => m.ProductType == "Granos");
                         var aseoRow = await _context.Product
-                                                     .FirstOrDefaultAsync(m => m.ProductType == "Aseo");
+                                                        .FirstOrDefaultAsync(m => m.ProductType == "Aseo");
 
-                        if (carnesRow != null && carnesRow.Amount != null)
+                        if (carnesRow != null && carnesRow.Amount != null && carnesRow.Amount >0)
                         {
                             carnesRow.Amount -= buyvalue.Carnesvalue;
                         }
 
-                        if (lacteosRow != null && lacteosRow.Amount != null)
+                        if (lacteosRow != null && lacteosRow.Amount != null && lacteosRow.Amount >0)
                         {
                             lacteosRow.Amount -= buyvalue.Lacteosvalue;
                         }
 
-                        if (granosRow != null && granosRow.Amount != null)
+                        if (granosRow != null && granosRow.Amount != null && granosRow.Amount > 0)
                         {
                             granosRow.Amount -= buyvalue.Granosvalue;
                         }
 
-                        if (aseoRow != null && aseoRow.Amount != null)
+                        if (aseoRow != null && aseoRow.Amount != null && aseoRow.Amount >0)
                         {
-                            aseoRow.Amount -= buyvalue.Aseovalue; 
+                            aseoRow.Amount -= buyvalue.Aseovalue;
                         }
 
                         if (carnesRow != null && lacteosRow != null && granosRow != null && aseoRow != null)
@@ -152,7 +173,7 @@ namespace SurtiPlus.Controllers
                         return View(buyvalue); // Re-render view with error message
                     }
 
-                    TempData["Message"] = "Edit successful";
+                    TempData["Message"] = "¡Compra exitosa!";
 
                     return (RedirectToAction(nameof(Buy))); // Redirect to success page
                 }
@@ -165,10 +186,14 @@ namespace SurtiPlus.Controllers
         // GET: Users/AdminHandle
         public async Task<IActionResult> AdminHandle()
         {
-            return _context.Product != null ?
-            View(await _context.Product.ToListAsync()) :
-            Problem("Entity set 'MVCCRUDContext.Product'  is null.");
+            
+            {
+                return _context.Product != null ?
+                View(await _context.Product.ToListAsync()) :
+                Problem("Entity set 'SurtiPlusContext.Product'  is null.");
+            }
         }
+
         // POST: Users/AdminHandle
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -227,7 +252,7 @@ namespace SurtiPlus.Controllers
                         return View(updatevalue); // Re-render view with error message
                     }
 
-                    TempData["Message"] = "Edit successful";
+                    TempData["Message"] = "¡Lotes añadidos exitosamente!";
 
                     return (RedirectToAction(nameof(AdminHandle))); // Redirect to success page
                 }

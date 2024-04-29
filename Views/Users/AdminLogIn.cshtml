@@ -6,7 +6,6 @@
 
 <h1>Administrador</h1>
 
-<h4>administrador</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,6 +21,7 @@
                 <input asp-for="AdminPassword" class="form-control" type="password"/>
                 <span asp-validation-for="AdminPassword" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Ingresar" class="btn btn-primary" />
             </div>
@@ -38,3 +38,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+

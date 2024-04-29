@@ -6,7 +6,7 @@
 
 <h1>Ingresar</h1>
 
-<h4>ingresar</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
+                <input asp-for="UserName" class="form-control"/>
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -22,6 +22,7 @@
                 <input asp-for="UserPassword" class="form-control" type="password"/>
                 <span asp-validation-for="UserPassword" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Ingresar" class="btn btn-primary" />
             </div>

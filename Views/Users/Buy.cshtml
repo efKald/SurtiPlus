@@ -3,10 +3,14 @@
 ViewData["Title"] = "Buy";
 }
 
-@Html.RenderPartialAsync("_BuyUserInformationPartial");
+<h1>Productos</h1>
 
-<h1>Products</h1>
-
+@if (TempData["Message"] != null)
+{
+    <div id="message" class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
 
 <table class="table">
     <thead>
@@ -47,32 +51,31 @@ ViewData["Title"] = "Buy";
             <div class="form-group">
                 <label for="Carnesvalue" class="control-label">Lotes de Carne</label>
                 <input type="text" id="Carnesvalue" name="Carnesvalue" class="form-control" style="width: 150px;" />
-            </div>|
+            </div>
+            <br>
             <div class="form-group">
                 <label for="Lacteosvalue" class="control-label">Lotes de Lacteos</label>
                 <input type="text" id="Lacteosvalue" name="Lacteosvalue" class="form-control" style="width: 150px;" />
-            </div>|
+            </div>
+            <br>
             <div class="form-group">
                 <label for="Granosvalue" class="control-label">Lotes de Granos</label>
                 <input type="text" id="Granosvalue" name="Granosvalue" class="form-control" style="width: 150px;" />
-            </div>|
+            </div>
+            <br>
             <div class="form-group">
                 <label for="Aseovalue" class="control-label">Lotes de Aseo</label>
                 <input type="text" id="Aseovalue" name="Aseovalue" class="form-control" style="width: 150px;" />
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Comprar Lotes" class="btn btn-primary" /> |
+                <input type="submit" value="Comprar Lotes" class="btn btn-primary" /> 
             </div>
         </form>
     </div>
 </div>
 
-@if (TempData["Message"] != null)
-{
-    <div id="message" class="alert alert-success">
-        @TempData["Message"]
-    </div>
-}
+<div id="errorMessage" class="error-message"></div>
 
 <div>
     <a asp-action="Welcome" asp-controller="Home">Página de bienvenida</a>
