@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurtiPlus", "SurtiPlus.csproj", "{2072DD54-683F-47A6-BE5E-D3ABF1E0E49C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurtiPlus", "SurtiPlus.csproj", "{2072DD54-683F-47A6-BE5E-D3ABF1E0E49C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\xUnit Test Project\TestProject.csproj", "{20FB1E6D-FBE5-49FC-9F88-3073F1AF9FBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2072DD54-683F-47A6-BE5E-D3ABF1E0E49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2072DD54-683F-47A6-BE5E-D3ABF1E0E49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2072DD54-683F-47A6-BE5E-D3ABF1E0E49C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20FB1E6D-FBE5-49FC-9F88-3073F1AF9FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20FB1E6D-FBE5-49FC-9F88-3073F1AF9FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20FB1E6D-FBE5-49FC-9F88-3073F1AF9FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20FB1E6D-FBE5-49FC-9F88-3073F1AF9FBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
